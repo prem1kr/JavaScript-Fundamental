@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question1,2,3,4,5,</title>
+</head>
+<body>
+    <div style="padding: 1%;">
+        <h2>Q1. Write a JavaScript function called outerFunction that takes a parameter and returns an inner function.
+            The inner function should access both the parameter of outerFunction and a variable declared within
+            outerFunction. Demonstrate how lexical scoping allows the inner function to maintain access to these
+            variables even after outerFunction has finished executing.</h2>
+
+            <h4 style="color: green;">
+  code:- <br>
+  function outerFunction(outerParameter) {
+    <br>
+    const outerVariable = "Hello from outerfunction";
+    <br>
+
+    function innerFunction() {
+        <br>
+        console.log(outerVariable); 
+        <br>
+        console.log(outerParameter);   
+        <br> 
+    }
+<br>
+    return innerFunction;
+}
+<br>
+
+const myInnerFunction = outerFunction("Passed Parameter");
+<br>
+
+myInnerFunction();
+
+
+            </h4>
+
+            <h4 style="color: blue;">
+Explanation:- <br>
+1. outerFunction(outerParam):-
+
+<li> This function takes one parameter outerParam. </li>
+<li> Inside outerFunction, a variable outerVariable is declared. </li>
+2. innerFunction():-
+
+<li>This is a nested function (also known as the inner function) declared inside outerFunction. </li>
+<li>innerFunction has access to both the outerParam passed to outerFunction and the outerVariable declared within outerFunction. </li>
+3. Returning innerFunction:-
+<li>
+outerFunction returns innerFunction, allowing you to store it in a variable (myInnerFunction). </li>
+4. Lexical Scoping:-
+<li>
+When outerFunction is called and returns innerFunction, the innerFunction still has access to the outerVariable and outerParam even after outerFunction has finished executing. This is because of lexical scoping in JavaScript, where functions remember the scope in which they were created. </li>
+
+            </h4>
+
+            <h2>Q2. Create a JavaScript program that demonstrates the basic usage of regular expressions. Write a function
+                that takes a regex pattern and a string as input and returns true if there is a match, and false otherwise. Test
+                the function with various patterns and strings.</h2>
+
+                <h4 style="color: green;">
+code:- <br>
+function testRegex(pattern, str) {
+    <br>
+    const regex = new RegExp(pattern); 
+    <br>
+    return regex.test(str);
+}
+<br>
+console.log(testRegex('hello', 'hello world'));  
+<br> 
+console.log(testRegex('world$', 'hello world')); 
+<br> 
+console.log(testRegex('^hello', 'hello world')); 
+<br> 
+console.log(testRegex('test', 'this is a test'));
+<br>
+console.log(testRegex('\\d+', '123abc'));  
+<br>       
+console.log(testRegex('\\d+', 'abc'));  
+<br>       
+console.log(testRegex('^abc$', 'abc')); 
+<br>          
+console.log(testRegex('^abc$', 'abc123'));  
+
+                </h4>
+
+                <h4 style="color: blue;">
+Explanation:- <br>
+1. testRegex(pattern, str):-
+
+
+<li>This function takes a regular expression pattern as a string (pattern) and another string to match against (str). </li>
+<li>The RegExp constructor is used to create a regular expression object from the pattern. </li>
+<li>The test method is used on the regex object to check if the pattern matches any part of the string str. </li>
+<li>The function returns true if there is a match, and false otherwise. </li>
+2. Regular Expressions (regex):-
+
+<li>Regular expressions are patterns used to match character combinations in strings. They are often used for searching, replacing, and extracting data from strings. </li>
+4. Examples:- 
+<li>testRegex('hello', 'hello world') returns true because the string hello world contains hello. </li>
+<li>testRegex('world$', 'hello world') returns true because world$ matches world at the end of the string. </li>
+<li>testRegex('\\d+', '123abc') returns true because \\d+ matches one or more digits in the string. </li>
+
+
+                </h4>
+
+                <h2>Q3. Write a JavaScript program that demonstrates the use of character classes in regular expressions.
+                    Create a function that searches for specific character classes in a given string and returns the matches. Test
+                    the function with patterns for digits, uppercase letters, lowercase letters, and special characters. </h2>
+                <h4 style="color: green;">
+ code:- <br>
+ function findMatches(pattern, str) {
+    <br>
+    const regex = new RegExp(pattern, 'g'); 
+    <br>
+    return str.match(regex); 
+}
+<br>
+const testString = "Hello World! 123 @#$";
+<br>
+
+console.log("Digits:", findMatches('\\d', testString));      
+<br>  
+console.log("Uppercase Letters:", findMatches('[A-Z]', testString));
+<br>
+console.log("Lowercase Letters:", findMatches('[a-z]', testString)); 
+<br>
+console.log("Special Characters:", findMatches('[^a-zA-Z0-9]', testString)); 
+ 
+                </h4>
+
+                <h4 style="color: blue;">
+Explanation:- <br>
+1. findMatches(pattern, str):-
+
+<li>This function takes a regular expression pattern as a string (pattern) and a string to search in (str). </li>
+<li>The RegExp constructor is used to create a regular expression object from the pattern with the global ('g') flag, which allows matching all occurrences in the string. </li>
+<li>The match method is used on the str to find all matches of the pattern and returns an array of matches. If no match is found, it returns null. </li>
+2. Character Classes:-
+
+<li>\d: Matches any digit (0-9). </li>
+<li>[A-Z]: Matches any uppercase letter. </li>
+<li>[a-z]: Matches any lowercase letter. </li>
+<li>[^a-zA-Z0-9]: Matches any character that is not a letter or a digit (i.e., special characters). </li>
+3. Testing the Function:-
+
+<li>The testString is "Hello World! 123 @#$", which contains uppercase letters, lowercase letters, digits, and special characters. </li>
+<li>The function is tested with different character classes to find and return specific types of characters in the string. </li>
+
+                </h4>
+
+                <h2>Q4. Create a JavaScript program that takes a regex pattern and a string as input. Write a function that not
+                    only checks if there is a match but also extracts specific parts of the matched text using groups. Test the
+                    function with patterns that include groups to capture different parts of a date (e.g., day, month, and year)
+                    from a given string. </h2>
+                <h4 style="color: green;"> 
+code:- 
+<br>
+function extractGroups(pattern, str) {
+    <br>
+    const regex = new RegExp(pattern);
+    <br>
+    const match = str.match(regex);
+    <br>
+
+    if (match) {
+        <br>
+        return {
+            <br>
+            fullMatch: match[0],  
+            <br>
+            groups: match.slice(1)
+        };
+        <br>
+    } else {
+        <br>
+        return null; 
+    }
+    <br>
+}
+
+const datePattern = '(\\d{2})-(\\d{2})-(\\d{4})'; 
+<br>
+const dateString = "The event is scheduled for 25-08-2024.";
+<br>
+
+const result = extractGroups(datePattern, dateString);
+<br>
+
+if (result) {
+    <br>
+    console.log("Full Match:", result.fullMatch);
+    <br>
+    console.log("Day:", result.groups[0]);
+    <br>
+    console.log("Month:", result.groups[1]);
+    <br>
+    console.log("Year:", result.groups[2]);
+    <br>
+} else {
+    <br>
+    console.log("No match found.");
+    <br>
+}
+
+                </h4>
+                <h4 style="color: blue;">
+Explanation:- <br>
+1. extractGroups(pattern, str):
+
+<li>The function takes a regular expression pattern (pattern) and a string (str) as input. </li>
+<li>A regular expression object (regex) is created using the RegExp constructor. </li>
+<li>The match method is used to find a match in the string. If a match is found, the function returns an object containing the full match and an array of captured groups. If no match is found, it returns null. </li>
+2.Regex Pattern for Date:
+
+<li>The pattern (\d{2})-(\d{2})-(\d{4}) is used to capture a date in the DD-MM-YYYY format: </li>
+<li>(\d{2}): Captures the day (two digits). </li>
+<li>(\d{2}): Captures the month (two digits). </li>
+<li>(\d{4}): Captures the year (four digits). </li>
+3.Testing the Function:
+
+<li>The dateString is "The event is scheduled for 21-09-2024.", which contains a date in the DD-MM-YYYY format.  </li>
+<li>The function extracts the day, month, and year from this date using the provided pattern. </li>
+                </h4>
+
+                <h2> Q5. You are building a shipping application. Write a program that takes the type of package ("standard",
+                    "express", or "overnight") and uses a switch statement to calculate and print the estimated delivery time
+                    based on the package type. For example, "standard" might take 3-5 days, "express" 1-2 days, and
+                    "overnight" would be delivered the next day. </h2>
+                <h4 style="color: green;"> 
+code:- <br>
+function getDeliveryTime(packageType) {
+    <br>
+    let deliveryTime;
+    <br>
+
+    switch (packageType.toLowerCase()) {
+        <br>
+        case "standard":
+        <br>
+            deliveryTime = "3-5 days";
+            <br>
+            break;
+            <br>
+        case "express":
+        <br>
+            deliveryTime = "1-2 days";
+            <br>
+            break;
+            <br>
+        case "overnight":
+        <br>
+            deliveryTime = "Next day";
+            <br>
+            break;
+            <br>
+        default:
+        <br>
+            deliveryTime = "Unknown package type";
+            <br>
+            break;
+    }
+<br>
+    console.log(`Estimated delivery time for ${packageType} package: ${deliveryTime}`);
+}
+<br>
+getDeliveryTime("standard");
+<br>
+getDeliveryTime("express");
+<br>
+getDeliveryTime("overnight");
+<br>
+getDeliveryTime("same-day");
+
+
+                </h4>
+                <h4 style="color: blue;">
+Explanation:- 
+<br>
+1. getDeliveryTime(packageType):-
+
+<li>This function takes the packageType as input and determines the delivery time based on the type of package. </li>
+<li>The switch statement is used to evaluate the packageType and assign the appropriate deliveryTime based on the type: </li>
+<li> "standard": Delivery time is 3-5 days. </li>
+<li> "express": Delivery time is 1-2 days. </li>
+<li> "overnight": Delivery time is Next day. </li>
+<li> The toLowerCase() method is used to handle any case variations in the input. </li>
+<li>If the packageType does not match any of the cases, the default case sets deliveryTime to "Unknown package type". </li>
+<li>The function then prints the estimated delivery time. </li>
+2.Testing the Function:
+
+<li>The function is tested with different package types: "standard", "express", "overnight", and an unknown type "same-day". </li>
+
+                </h4>
+    </div>
+
+    <script src="Question5.js"></script>
+<script src="Question4.js"></script>
+    <script src="Question3.js"></script>
+<script src="Question2.js"> </script>
+    <script src="Question1.js"></script>
+</body>
+</html>
